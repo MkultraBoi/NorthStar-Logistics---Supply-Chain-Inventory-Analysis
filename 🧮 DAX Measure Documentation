@@ -1,0 +1,67 @@
+This file documents the core logic used in the NorthStar Logistics dashboard.
+
+1. Shipment Performance
+
+On-Time Delivery % (OTD)
+Calculates the percentage of orders delivered on or before the due date.
+
+OTD % = 
+VAR OnTimeShipments = 
+    CALCULATE(
+        DISTINCTCOUNT(Shipments[OrderID]),
+        Shipments[DeliveryDate] <= Shipments[DueDate]
+    )
+VAR TotalShipments = DISTINCTCOUNT(Shipments[OrderID])
+RETURN
+    DIVIDE(OnTimeShipments, TotalShipments, 0)
+
+
+2. Advanced Analytics
+
+Top 3 Co-Shipped Products (Market Basket Analysis)
+Identifies which products are frequently purchased alongside a selected item.
+Logic: 1. Identify orders with selected item. 2. Calculate revenue of OTHER items in those orders.
+
+Top 3 Co-Shipped Products = 
+VAR TargetProduct = SELECTEDVALUE('Products'[ProductID])
+
+-- Get list of Order IDs containing the selected product
+VAR OrderWithTarget = 
+    CALCULATETABLE(
+        VALUES('Shipments_Data'[OrderID]), 
+        'Products'[ProductID] = TargetProduct
+    )
+
+RETURN
+    CALCULATE(
+        [Total Revenue], 
+        -- Filter for orders found in step 1
+        'Shipments_Data'[OrderID] IN OrderWithTarget,
+        -- Exclude the selected product itself
+        'Products'[ProductID] <> TargetProduct,
+        -- Remove filters to ensure other products are visible
+        REMOVEFILTERS('Products') 
+    )
+
+
+3. Financial Simulation
+
+Simulated Shipping Cost (What-If Parameter)
+Allows users to adjust a slider to see the impact of rate increases.
+
+Simulated Shipping Cost = 
+VAR RateIncrease = 'Rate Increase %'[Rate Increase % Value]
+RETURN
+[Total Shipping Cost] * (1 + RateIncrease)
+
+
+4. Inventory Health
+
+Sell-Through Rate %
+Used in the "Inventory Risk Matrix" scatter chart.
+
+Sell-Through Rate % = 
+VAR SalesQty = [Total Qty]
+VAR StockQty = [Inv Qty Hand]
+RETURN
+DIVIDE(SalesQty, SalesQty + StockQty, 0)
