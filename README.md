@@ -46,7 +46,8 @@ Page 2: Operations & Inventory: Scatter chart analysis for inventory risk and gr
 
 #### 📸 Dashboard Visuals
 
-<img width="1608" height="852" alt="Northstart logistics 1" src="https://github.com/user-attachments/assets/78b29e27-0fda-47bc-8bb3-d872fe6e8940" />
+<img width="1350" height="737" alt="northwind 1" src="https://github.com/user-attachments/assets/79723ef7-88ec-4c83-bf02-1b057c5d3a95" />
+
 
 #### Key Insights Discovered
 
@@ -56,7 +57,8 @@ Cost Savings: The "What-If" simulation revealed that a 10% carrier rate hike wou
 
 Cross-Selling: Analysis showed that 60% of "Monitor" orders include a "Docking Station," suggesting a bundle opportunity.
 
-<img width="1612" height="852" alt="Northstart logistics 2" src="https://github.com/user-attachments/assets/31f88875-006a-4a64-a3d3-d630b36a2dd4" />
+<img width="1082" height="728" alt="northwind 2" src="https://github.com/user-attachments/assets/a49e84bb-9ee8-483e-bdac-ac5a923bb96a" />
+
 
 ### 👨‍💻 Author's Note (For Recruiters)
 
